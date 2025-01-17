@@ -41,7 +41,7 @@ phone=your_phone_number
 ### **1. Start Historical Data Scraping**  
 Extract messages from selected channels and store them in `telegram_data.csv`:  
 ```bash
-python scrape.py
+python telegram_scraper.py
 ```
 
 ### **2. Enable Real-Time Monitoring**  
@@ -60,7 +60,6 @@ python real_time_monitor.py
 │ └── unittests.yml
 ├── .vscode
 ├── data
-│ ├── @mertteka_labeled_data.conll
 │ ├── labeled_amharic_data.conll
 │ ├── labeled_data_conll.conll
 │ ├── labeled_data.conll
