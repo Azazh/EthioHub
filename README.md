@@ -1,4 +1,4 @@
-# **EthioMart Telegram Scraper**  
+# **EthioMart ecommerce**  
 
 ## **Overview**  
 EthioMart Telegram Scraper is a Python-based tool designed to extract structured data from Ethiopian e-commerce Telegram channels. The scraper retrieves historical messages, monitors new messages in real time, and stores extracted data in a structured format, including text, metadata, and media.  
