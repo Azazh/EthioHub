@@ -1,13 +1,14 @@
-# **EthioMart ecommerce**  
+# **EthioMart eCommerce**  
 
 ## **Overview**  
-EthioMart Telegram Scraper is a Python-based tool designed to extract structured data from Ethiopian e-commerce Telegram channels. The scraper retrieves historical messages, monitors new messages in real time, and stores extracted data in a structured format, including text, metadata, and media.  
+EthioMart Telegram Scraper is a Python-based tool designed to extract structured data from Ethiopian e-commerce Telegram channels. The scraper retrieves historical messages, monitors new messages in real time, and stores extracted data in a structured format, including text, metadata, and media. Additionally, EthioMart employs a fine-tuned LLM for Amharic Named Entity Recognition (NER) to extract key business entities such as product names, prices, and locations from the collected data.
 
 ## **Features**  
 ✅ **Historical Data Scraping** – Extracts up to 10,000 past messages per channel.  
 ✅ **Real-Time Monitoring** – Captures new messages instantly as they are posted.  
 ✅ **Media Handling** – Downloads and stores images from Telegram messages.  
-✅ **Structured Data Storage** – Saves data in a CSV file for further processing.  
+✅ **Structured Data Storage** – Saves data in CSV and CoNLL formats for further processing.  
+✅ **Amharic NER** – Fine-tuned LLM to extract product names, prices, and locations.  
 ✅ **Scalable & Customizable** – Easily add more channels for scraping.  
 
 ---
@@ -50,32 +51,46 @@ Automatically log new messages from specified channels:
 python real_time_monitor.py
 ```
 
+### **3. Preprocess Extracted Data**  
+Preprocess text data, tokenize, and normalize Amharic text:  
+```bash
+python preprocess_data.py
+```
+
+### **4. Label Data for NER (CoNLL Format)**  
+A subset of the dataset is manually labeled in the CoNLL format to train the Amharic NER model. Example:
+```
+በልዩ ዋጋ B-PRICE
+1000 I-PRICE
+ብር I-PRICE
+እንዲሁም O
+በ B-LOC
+አዲስ B-LOC
+አበባ I-LOC
+ይገኛል O
+```
+Labeled data is stored in `data/labeled_amharic_data.conll`.
+
 ---
 
 ## **Project Structure**  
 ```
 .
 ├── .github
-│ └── workflows
-│ └── unittests.yml
+│   └── workflows
+│       └── unittests.yml
 ├── .vscode
 ├── data
-│ ├── labeled_amharic_data.conll
-│ ├── labeled_data_conll.conll
-│ ├── labeled_data.conll
-│ ├── labeled_ner_data.conll
-│ ├── merged_amharic_ner_data.conll
-│ ├── preprocessed_telegram_data.csv
-│ ├── qnashcom_labeled_data.conll
-│ ├── telegram_data.csv
-│ ├── telegram_data.xlsx
-│ └── tokens_labels.conll
+│   ├── labeled_amharic_data.conll
+│   ├── preprocessed_telegram_data.csv
+│   ├── telegram_data.csv
+│   ├── telegram_data.xlsx
+│   ├── tokens_labels.conll
 ├── notebooks
-│ ├── init.py
-│ ├── data_ingestion_and_data_preprocessing.ipynb
-│ └── label_dataset_conll_format.ipynb
+│   ├── data_ingestion_and_data_preprocessing.ipynb
+│   ├── label_dataset_conll_format.ipynb
 ├── scripts
-│ └── init.py
+│   └── preprocess_data.py
 ├── src
 ├── tests
 ├── venv
@@ -92,12 +107,14 @@ Extracted data is saved in `telegram_data.csv` with the following fields:
 |--------------|-----------------|------------|--------------|------|------------|
 | FashionTera | @fashiontera | 12345 | "New dresses available!" | 2024-01-01 | photos/fashiontera_12345.jpg |
 
+Labeled data is stored in CoNLL format for NER model training.
+
 ---
 
 ## **Next Steps**  
-🔹 Implement NLP-based entity recognition for price, location, and product detection.  
-🔹 Train an AI model to categorize and analyze e-commerce trends.  
-🔹 Optimize data retrieval for large-scale monitoring.  
+🔹 Fine-tune and train the Amharic NER model on the labeled dataset.  
+🔹 Implement automated entity recognition and structured data extraction.  
+🔹 Optimize data retrieval and storage for large-scale monitoring.  
 
 ---
 
